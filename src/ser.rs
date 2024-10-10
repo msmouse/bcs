@@ -50,7 +50,7 @@ pub fn to_bytes<T>(value: &T) -> Result<Vec<u8>>
 where
     T: ?Sized + Serialize,
 {
-    let mut output = Vec::new();
+    let mut output = Vec::with_capacity(128);
     serialize_into(&mut output, value)?;
     Ok(output)
 }
@@ -65,7 +65,7 @@ where
             "limit exceeds the max allowed depth 500",
         ));
     }
-    let mut output = Vec::new();
+    let mut output = Vec::with_capacity(128);
     serialize_into_with_limit(&mut output, value, limit)?;
     Ok(output)
 }
